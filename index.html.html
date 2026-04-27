@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cybersecurity Professionals Digest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0a0a0a;
+      --accent: #111111;
+      --border: #d0d0d0;
+      --muted: #555555;
+      --tag-bg: #f0f0f0;
+      --hover-bg: #f7f7f7;
+      --rule: #222222;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 3px double var(--rule);
+      padding: 2.5rem 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+    header::before {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--text);
+      margin: 0 auto 1.2rem;
+    }
+    .masthead-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    h1.blog-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    h1.blog-title span {
+      display: block;
+      font-size: 0.45em;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+    .header-rule {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.2rem auto 0;
+      max-width: 500px;
+    }
+    .header-rule::before, .header-rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .header-rule-icon {
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    /* ── INTRO ── */
+    .intro-section {
+      max-width: 700px;
+      margin: 2.5rem auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .intro-section p {
+      font-size: 1rem;
+      color: var(--muted);
+      font-style: italic;
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.75rem;
+      position: relative;
+      background: #fafafa;
+    }
+    .intro-section p::before {
+      content: '§';
+      position: absolute;
+      top: -0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg);
+      padding: 0 0.5rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      text-align: center;
+      margin: 3rem 0 1.5rem;
+    }
+    .section-label h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-block;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+    }
+
+    /* ── TOPIC GRID ── */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0;
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    .topic-card {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.75rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .topic-card:hover { background: var(--hover-bg); }
+    .topic-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+
+    .card-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .card-excerpt {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .card-arrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text);
+      margin-top: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0.4;
+      transform: translateX(-4px);
+      transition: all 0.2s ease;
+    }
+
+    /* ── ARTICLE VIEW ── */
+    #article-view {
+      display: none;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+      animation: fadeUp 0.4s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin: 2.5rem 0 3rem;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: var(--hover-bg); color: var(--text); }
+
+    .article-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .article-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 1.5rem;
+    }
+
+    .article-body { font-size: 1.0625rem; }
+    .article-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin: 2.5rem 0 0.75rem;
+      color: var(--text);
+      border-left: 3px solid var(--text);
+      padding-left: 0.75rem;
+    }
+    .article-body p { margin-bottom: 1.25rem; }
+    .article-body ul {
+      margin: 0.5rem 0 1.25rem 1.5rem;
+    }
+    .article-body ul li { margin-bottom: 0.5rem; }
+    .article-body .definition-box {
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      background: #f9f9f9;
+      position: relative;
+    }
+    .article-body .definition-box::before {
+      content: 'DEFINITION';
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      position: absolute;
+      top: -0.55rem;
+      left: 1rem;
+      background: #f9f9f9;
+      padding: 0 0.4rem;
+    }
+    .article-body .use-case {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem 1.25rem;
+      border-left: 2px solid var(--text);
+      background: #f9f9f9;
+    }
+    .use-case-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      min-width: 1.5rem;
+      padding-top: 0.1rem;
+    }
+    .use-case-body strong {
+      display: block;
+      font-family: 'Source Serif 4', serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+    .use-case-body p { font-size: 0.9rem; margin: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 3px double var(--rule);
+      padding: 2rem;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    /* ── HOME / ARTICLE TOGGLE ── */
+    #home-view { display: block; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <p class="masthead-label">Vol. I &nbsp;·&nbsp; CECS 6046 &nbsp;·&nbsp; 2025</p>
+    <h1 class="blog-title">
+      Cybersecurity Professionals Digest
+      <span>by Irvin E. Hernández</span>
+    </h1>
+    <div class="header-rule"><span class="header-rule-icon">◆</span></div>
+  </header>
+
+  <!-- HOME VIEW -->
+  <div id="home-view">
+    <section class="intro-section">
+      <p>
+        This blog is authored by <strong>Irvin Hernández</strong> in partial fulfillment of the requirements for
+        <strong>CECS 6046</strong> — Part IV Assignment. It explores six critical themes at the intersection of
+        cybersecurity and electronic discovery.
+      </p>
+    </section>
+
+    <div class="section-label"><h2>Topics — Click to Read</h2></div>
+
+    <div class="topics-grid" id="topics-grid">
+      <!-- Cards injected by JS -->
+    </div>
+  </div>
+
+  <!-- ARTICLE VIEW -->
+  <div id="article-view">
+    <button class="back-btn" onclick="showHome()">← Back to Topics</button>
+    <div class="article-meta" id="article-meta"></div>
+    <h2 class="article-title" id="article-title"></h2>
+    <div class="article-body" id="article-body"></div>
+  </div>
+
+  <footer>
+    <p>© 2025 Cybersecurity Professionals Digest &nbsp;·&nbsp; Irvin E. Hernández &nbsp;·&nbsp; CECS 6046</p>
+  </footer>
+
+  <script>
+    const topics = [
+      {
+        number: "01",
+        title: "Antiforensics",
+        excerpt: "Techniques used to obstruct, impede, or mislead digital investigations.",
+        meta: "Topic 01 · Digital Forensics",
+        content: `
+          <p>Antiforensics (also written as anti-forensics) is one of the most challenging frontiers in the cybersecurity and digital investigation landscape. As forensic examiners grow more sophisticated, so too do adversaries who wish to evade detection. Understanding antiforensics is not just the domain of attackers — it is essential knowledge for every forensic professional.</p>
+
+          <div class="definition-box">
+            <p><strong>Antiforensics</strong> refers to a collection of techniques, methods, and tools designed to obstruct, prevent, or mislead digital forensic investigations. The goal is to make it difficult or impossible for forensic investigators to discover, collect, or interpret digital evidence.</p>
+          </div>
+
+          <h3>Core Categories</h3>
+          <p>Antiforensics encompasses a broad range of tactics, generally grouped into four categories:</p>
+          <ul>
+            <li><strong>Data Hiding:</strong> Concealing data through steganography, slack space manipulation, or encryption.</li>
+            <li><strong>Artifact Wiping:</strong> Destroying data traces using secure deletion tools like Eraser or DBAN.</li>
+            <li><strong>Trail Obfuscation:</strong> Modifying log files, timestamps, or metadata to confuse investigators.</li>
+            <li><strong>Evidence Destruction:</strong> Physically or logically destroying storage media or relevant files.</li>
+          </ul>
+
+          <h3>Why It Matters</h3>
+          <p>Cybercriminals increasingly deploy antiforensic techniques before, during, and after attacks. Ransomware operators may wipe event logs. Insiders may use file shredders. Nation-state actors may spoof timestamps to misdirect attribution. Without a working knowledge of these methods, investigators risk collecting incomplete evidence or drawing incorrect conclusions.</p>
+
+          <h3>Practical Use Cases</h3>
+          <div class="use-case"><span class="use-case-num">01</span><div class="use-case-body"><strong>Log Tampering in Corporate Espionage</strong><p>An insider threat actor deletes Windows Event Logs and clears PowerShell history prior to exfiltrating sensitive IP. Forensic examiners must rely on Volume Shadow Copies and third-party SIEM logs to reconstruct the timeline.</p></div></div>
+          <div class="use-case"><span class="use-case-num">02</span><div class="use-case-body"><strong>Timestamp Manipulation in Malware Deployment</strong><p>Attackers use tools like Timestomp to alter NTFS MAC times on malicious executables, making them appear as decades-old system files to avoid triage filters.</p></div></div>
+          <div class="use-case"><span class="use-case-num">03</span><div class="use-case-body"><strong>Steganography in Data Exfiltration</strong><p>Sensitive documents are encoded within ordinary image files and sent via email. Without steganography detection tools, the exfiltration goes unnoticed by DLP systems.</p></div></div>
+          <div class="use-case"><span class="use-case-num">04</span><div class="use-case-body"><strong>Secure Wipe Before Seizure</strong><p>A suspect runs a DoD-compliant disk wipe utility when aware of impending law enforcement arrival, significantly limiting recoverable evidence and complicating prosecution.</p></div></div>
+
+          <h3>Defender's Perspective</h3>
+          <p>Forensic professionals counter antiforensics through immutable logging pipelines (SIEM/SOAR), write-blockers during acquisition, hash verification at every stage, and awareness of known antiforensic tool signatures. The arms race between forensic science and antiforensics continues to shape investigative methodology.</p>
+        `
+      },
+      {
+        number: "02",
+        title: "Collecting Evidence",
+        excerpt: "Best practices and legal standards for acquiring digital evidence in investigations.",
+        meta: "Topic 02 · Digital Forensics",
+        content: `
+          <p>The integrity of any digital investigation hinges entirely on how evidence is collected. A single misstep in acquisition — whether technical or procedural — can render otherwise compelling evidence inadmissible in court. Collecting evidence is both a science and a legal discipline.</p>
+
+          <div class="definition-box">
+            <p><strong>Digital evidence collection</strong> is the process of identifying, preserving, acquiring, and documenting electronic data in a forensically sound manner — ensuring its authenticity, integrity, and admissibility throughout the investigative and legal process.</p>
+          </div>
+
+          <h3>The Order of Volatility</h3>
+          <p>RFC 3227 establishes the foundational principle: collect the most volatile evidence first. The order generally proceeds from CPU registers and cache → RAM → network connections → running processes → disk storage → offline backups. Investigators who skip volatile sources lose ephemeral evidence permanently.</p>
+
+          <h3>Core Principles</h3>
+          <ul>
+            <li><strong>Chain of Custody:</strong> Every individual who handles evidence must be documented from collection to courtroom.</li>
+            <li><strong>Forensic Integrity:</strong> Use write-blockers and cryptographic hash verification (MD5, SHA-256) to prove evidence was not altered.</li>
+            <li><strong>Documentation:</strong> Photographs, detailed notes, and acquisition logs must accompany every piece of collected evidence.</li>
+            <li><strong>Legal Authority:</strong> Ensure proper warrants or consent are in place before seizure.</li>
+          </ul>
+
+          <h3>Practical Use Cases</h3>
+          <div class="use-case"><span class="use-case-num">01</span><div class="use-case-body"><strong>Live Memory Acquisition in Ransomware Response</strong><p>During an active ransomware incident, investigators use tools like Magnet RAM Capture or WinPmem to acquire live RAM before shutting down affected systems, preserving encryption keys that may still reside in memory.</p></div></div>
+          <div class="use-case"><span class="use-case-num">02</span><div class="use-case-body"><strong>Disk Imaging in HR Investigation</strong><p>HR and legal counsel request a forensic copy of a departing employee's workstation. Using FTK Imager with a hardware write-blocker, investigators create a bit-for-bit copy verified by SHA-256 hash before any analysis.</p></div></div>
+          <div class="use-case"><span class="use-case-num">03</span><div class="use-case-body"><strong>Cloud Evidence Collection</strong><p>Investigators coordinate with cloud service providers via legal process (subpoena/warrant) to obtain server logs, access records, and stored data from platforms like AWS or Microsoft 365, following their respective legal request portals.</p></div></div>
+          <div class="use-case"><span class="use-case-num">04</span><div class="use-case-body"><strong>Email Preservation in Litigation Hold</strong><p>Upon notice of litigation, an organization's IT team places a legal hold on all email accounts belonging to relevant custodians, preventing auto-deletion and ensuring collections are complete and defensible.</p></div></div>
+
+          <h3>Tools of the Trade</h3>
+          <p>Common forensic acquisition tools include Autopsy, EnCase, FTK (Forensic Toolkit), Cellebrite (mobile), and open-source utilities like dd and dc3dd. Each tool must be validated and documented in the examiner's methodology to withstand expert scrutiny in court.</p>
+        `
+      },
+      {
+        number: "03",
+        title: "E-Discovery Law & Legal Aspects",
+        excerpt: "The regulatory framework governing the discovery of electronically stored information.",
+        meta: "Topic 03 · Legal & Compliance",
+        content: `
+          <p>Electronic discovery — or e-discovery — operates at the crossroads of law, technology, and information governance. For cybersecurity professionals who support legal teams, understanding the legal framework is not optional. Failure to comply with e-discovery obligations can result in sanctions, adverse inference instructions, or outright dismissal of claims.</p>
+
+          <div class="definition-box">
+            <p><strong>E-Discovery (Electronic Discovery)</strong> refers to the process by which electronically stored information (ESI) is identified, preserved, collected, processed, reviewed, and produced in response to legal proceedings, regulatory investigations, or internal inquiries, in compliance with applicable legal obligations.</p>
+          </div>
+
+          <h3>Governing Legal Framework</h3>
+          <p>In the United States, e-discovery is primarily governed by the <strong>Federal Rules of Civil Procedure (FRCP)</strong>, particularly Rules 26, 34, and 37, as amended in 2006 and 2015. Key legal concepts include:</p>
+          <ul>
+            <li><strong>Litigation Hold:</strong> A legal directive to preserve potentially relevant ESI upon anticipation of litigation.</li>
+            <li><strong>Proportionality:</strong> FRCP Rule 26(b)(1) limits discovery to what is proportional to the needs of the case.</li>
+            <li><strong>Spoliation:</strong> Failure to preserve evidence that should have been retained; can result in severe sanctions.</li>
+            <li><strong>Zubulake Standard:</strong> Landmark case law setting standards for ESI preservation and production obligations.</li>
+          </ul>
+
+          <h3>The EDRM Model</h3>
+          <p>The <strong>Electronic Discovery Reference Model (EDRM)</strong> provides a widely-adopted framework outlining the stages of e-discovery: Information Governance → Identification → Preservation → Collection → Processing → Review → Analysis → Production → Presentation.</p>
+
+          <h3>Practical Use Cases</h3>
+          <div class="use-case"><span class="use-case-num">01</span><div class="use-case-body"><strong>Corporate Litigation Hold Failure</strong><p>A corporation fails to issue a timely litigation hold following notice of a lawsuit, resulting in auto-deletion of responsive emails. The court issues a spoliation sanction and adverse inference instruction, presuming the deleted emails were harmful to the corporation's case.</p></div></div>
+          <div class="use-case"><span class="use-case-num">02</span><div class="use-case-body"><strong>GDPR and Cross-Border ESI</strong><p>A multinational company faces a U.S. lawsuit but must balance FRCP production obligations against EU GDPR data transfer restrictions, requiring careful legal coordination across jurisdictions.</p></div></div>
+          <div class="use-case"><span class="use-case-num">03</span><div class="use-case-body"><strong>Regulatory Investigation — SEC Subpoena</strong><p>A financial firm receives an SEC subpoena for trading communications. Their ESI must be produced in a specified format (often TIFF with load files), with privilege logs identifying any withheld attorney-client communications.</p></div></div>
+          <div class="use-case"><span class="use-case-num">04</span><div class="use-case-body"><strong>Rule 26(f) Meet and Confer</strong><p>Before discovery begins, opposing counsel must confer about ESI sources, formats, and scope. Cybersecurity professionals are often called to participate, advising on what data exists, where it lives, and the cost of retrieval.</p></div></div>
+        `
+      },
+      {
+        number: "04",
+        title: "The Future of E-Discovery",
+        excerpt: "AI, cloud computing, and emerging challenges reshaping discovery practice.",
+        meta: "Topic 04 · Emerging Trends",
+        content: `
+          <p>The volume, variety, and velocity of electronically stored information continue to grow at an exponential rate. Technologies that barely existed a decade ago — cloud platforms, collaboration tools, generative AI, encrypted messaging — are now central to how organizations operate and, increasingly, to how they are investigated.</p>
+
+          <div class="definition-box">
+            <p>The <strong>future of e-discovery</strong> encompasses the evolving challenges, tools, and legal frameworks required to manage, identify, and produce electronically stored information as digital communication landscapes — including AI-generated content, cloud-native environments, and ephemeral messaging — grow increasingly complex.</p>
+          </div>
+
+          <h3>Key Emerging Trends</h3>
+          <ul>
+            <li><strong>AI-Assisted Review (TAR/CAL):</strong> Technology-Assisted Review and Continuous Active Learning dramatically reduce the cost and time of document review by using machine learning to prioritize relevant documents.</li>
+            <li><strong>Generative AI as ESI:</strong> AI-generated emails, summaries, and decisions are increasingly relevant in litigation, raising questions about authorship, retention, and discoverability.</li>
+            <li><strong>Cloud-Native ESI:</strong> Data in SaaS platforms (Slack, Teams, Salesforce, Google Workspace) does not behave like traditional file-based ESI, creating new collection and authentication challenges.</li>
+            <li><strong>Ephemeral Messaging:</strong> Auto-deleting platforms (Signal, Snapchat, Telegram) create preservation conflicts when used for business communications.</li>
+          </ul>
+
+          <h3>The AI Revolution in Review</h3>
+          <p>Predictive coding and TAR have moved from novelty to accepted practice, validated in courts via cases like <em>Da Silva Moore v. Publicis Groupe</em>. The next frontier involves large language models assisting with privilege review, deposition preparation, and contract analysis — dramatically compressing timelines and costs while introducing new questions about accuracy, explainability, and bias.</p>
+
+          <h3>Practical Use Cases</h3>
+          <div class="use-case"><span class="use-case-num">01</span><div class="use-case-body"><strong>TAR 2.0 in Mass Tort Litigation</strong><p>A pharmaceutical company facing thousands of product liability claims uses Continuous Active Learning to review 10 million documents. A single experienced attorney's coding decisions continuously train the model, making the review both faster and more defensible than linear review.</p></div></div>
+          <div class="use-case"><span class="use-case-num">02</span><div class="use-case-body"><strong>Microsoft Teams Evidence in Workplace Disputes</strong><p>An employment lawsuit turns on deleted Teams messages. Forensic teams must navigate Microsoft's compliance center, retention policies, and eDiscovery export tools — a workflow entirely different from traditional email collection.</p></div></div>
+          <div class="use-case"><span class="use-case-num">03</span><div class="use-case-body"><strong>AI-Generated Email in Securities Fraud</strong><p>Investigators discover that AI writing assistants were used to draft internal communications, raising authentication questions: who is the actual author, and does the AI's involvement change privilege or intent analysis?</p></div></div>
+          <div class="use-case"><span class="use-case-num">04</span><div class="use-case-body"><strong>Blockchain as Tamper-Proof Evidence</strong><p>Organizations begin using blockchain timestamping to create immutable audit logs, providing courts with verifiable chains of custody for digital records and reducing disputes over evidence authenticity.</p></div></div>
+        `
+      },
+      {
+        number: "05",
+        title: "Network Forensics",
+        excerpt: "Capturing, recording, and analyzing network traffic to reconstruct security events.",
+        meta: "Topic 05 · Digital Forensics",
+        content: `
+          <p>When a breach occurs, the attack narrative is almost always written in network traffic. Network forensics is the discipline that reads that narrative — reconstructing attacker behavior, lateral movement, and exfiltration from the packets and flows traversing an organization's infrastructure.</p>
+
+          <div class="definition-box">
+            <p><strong>Network forensics</strong> is the capture, recording, and analysis of network events and traffic for the purposes of discovering the source of security attacks, investigating policy violations, reconstructing intrusion timelines, and producing evidence suitable for legal or regulatory proceedings.</p>
+          </div>
+
+          <h3>Two Schools of Thought</h3>
+          <p>Network forensics investigations generally follow one of two models:</p>
+          <ul>
+            <li><strong>"Catch-It-As-You-Can":</strong> All traffic is captured at key network points for later analysis. Requires significant storage but provides complete fidelity.</li>
+            <li><strong>"Stop, Look, and Listen":</strong> Each packet is analyzed in real-time and only suspicious traffic is stored. More storage-efficient but risks missing subtle attack patterns.</li>
+          </ul>
+
+          <h3>Key Data Sources</h3>
+          <ul>
+            <li>Full packet capture (PCAP) via tools like Wireshark, tcpdump, Zeek (Bro)</li>
+            <li>NetFlow / IPFIX records from routers and switches</li>
+            <li>DNS query logs — often the first indicator of C2 communication</li>
+            <li>Firewall and proxy logs</li>
+            <li>IDS/IPS alerts (Snort, Suricata)</li>
+          </ul>
+
+          <h3>Practical Use Cases</h3>
+          <div class="use-case"><span class="use-case-num">01</span><div class="use-case-body"><strong>APT Lateral Movement Detection</strong><p>During incident response, analysts review internal NetFlow records to identify abnormal SMB traffic between workstations — a hallmark of lateral movement. PCAP analysis confirms credential harvesting activity consistent with Mimikatz usage.</p></div></div>
+          <div class="use-case"><span class="use-case-num">02</span><div class="use-case-body"><strong>DNS Exfiltration Investigation</strong><p>A threat hunt reveals unusually high volumes of DNS queries with long, random-looking subdomains to an external domain. Packet analysis confirms data is being encoded in DNS queries and tunneled out of the network.</p></div></div>
+          <div class="use-case"><span class="use-case-num">03</span><div class="use-case-body"><strong>Ransomware Command-and-Control Mapping</strong><p>Post-incident, forensic analysts reconstruct the attacker's C2 infrastructure by analyzing beacon patterns in encrypted TLS traffic, identifying the timing, periodicity, and jitter consistent with known RAT frameworks.</p></div></div>
+          <div class="use-case"><span class="use-case-num">04</span><div class="use-case-body"><strong>Insider Threat Data Exfiltration</strong><p>Proxy logs reveal a user uploading gigabytes of data to a personal cloud storage service outside of business hours. Network forensics provides timestamps, volume metrics, and destination IPs needed to support HR and legal action.</p></div></div>
+
+          <h3>Legal Considerations</h3>
+          <p>Network traffic capture raises significant privacy and legal questions. In the U.S., the Electronic Communications Privacy Act (ECPA) and the Wiretap Act govern real-time interception. Organizations must ensure they have appropriate policies, employee notification, and legal authority before deploying packet capture infrastructure.</p>
+        `
+      },
+      {
+        number: "06",
+        title: "Mobile Device Forensics",
+        excerpt: "Extracting and analyzing digital evidence from smartphones and tablets.",
+        meta: "Topic 06 · Digital Forensics",
+        content: `
+          <p>The smartphone has become the single most intimate digital artifact in modern life. People store communications, location data, financial records, photographs, and application data on devices they carry everywhere. For forensic investigators, mobile devices are often the most evidence-rich — and technically challenging — sources in an investigation.</p>
+
+          <div class="definition-box">
+            <p><strong>Mobile device forensics</strong> is a branch of digital forensics involving the recovery, preservation, examination, and analysis of data from mobile devices — including smartphones, tablets, GPS units, and wearables — using forensically sound methods that ensure data integrity and legal admissibility.</p>
+          </div>
+
+          <h3>Types of Acquisition</h3>
+          <p>Mobile forensics offers several acquisition methods, each with different capability and invasiveness levels:</p>
+          <ul>
+            <li><strong>Manual Extraction:</strong> Manually browsing and photographing on-screen content. Limited but no technical risk.</li>
+            <li><strong>Logical Extraction:</strong> Using device backup mechanisms (iTunes, ADB) to extract accessible files and databases.</li>
+            <li><strong>File System Extraction:</strong> Deeper access to the device file system, including deleted file remnants.</li>
+            <li><strong>Physical Extraction:</strong> Full chip-off or JTAG acquisition — byte-for-byte image of flash memory. Maximum data recovery but requires advanced hardware.</li>
+            <li><strong>Cloud Extraction:</strong> Acquiring data from associated cloud backups (iCloud, Google Account) via legal process or device credentials.</li>
+          </ul>
+
+          <h3>Key Evidence Sources on Mobile Devices</h3>
+          <ul>
+            <li>SMS, MMS, iMessage, and third-party messaging apps (WhatsApp, Signal, Telegram)</li>
+            <li>Call logs, voicemails, and contact databases</li>
+            <li>GPS and location history — often extremely granular</li>
+            <li>Photos, videos, and their EXIF metadata</li>
+            <li>Application data (social media, banking, navigation)</li>
+            <li>Browser history, cached pages, and cookies</li>
+          </ul>
+
+          <h3>Practical Use Cases</h3>
+          <div class="use-case"><span class="use-case-num">01</span><div class="use-case-body"><strong>Criminal Investigation — Homicide</strong><p>Investigators obtain a warrant for a suspect's iPhone. Using Cellebrite UFED, a full file system extraction reveals deleted iMessages, location data placing the suspect at the crime scene, and photographs with incriminating timestamps.</p></div></div>
+          <div class="use-case"><span class="use-case-num">02</span><div class="use-case-body"><strong>Corporate Insider Threat</strong><p>A departing executive's company-issued Android device is examined. MDM logs combined with a logical Cellebrite extraction reveal that sensitive documents were shared via WhatsApp to a personal number the week before resignation.</p></div></div>
+          <div class="use-case"><span class="use-case-num">03</span><div class="use-case-body"><strong>Civil Litigation — Employment Dispute</strong><p>A plaintiff claims harassment via text messages. Opposing counsel challenges authenticity. Forensic extraction of the device with hash verification confirms the messages are unaltered and consistent with the device's SQLite message database records.</p></div></div>
+          <div class="use-case"><span class="use-case-num">04</span><div class="use-case-body"><strong>Counter-Terrorism Analysis</strong><p>Law enforcement obtains encrypted messaging app data through an iCloud backup warrant. Combined with cell tower records, investigators reconstruct a communication network and meeting timeline relevant to a terrorism investigation.</p></div></div>
+
+          <h3>Encryption and Legal Challenges</h3>
+          <p>Modern mobile devices — particularly those running iOS 16+ and Android 13+ — employ full-disk encryption with hardware-backed key derivation. The "Going Dark" problem refers to law enforcement's increasing inability to access encrypted device content without cooperation from manufacturers. The legal and policy debate between privacy rights and lawful access continues to be one of the most contentious in digital forensics.</p>
+        `
+      }
+    ];
+
+    // Render topic cards
+    const grid = document.getElementById('topics-grid');
+    topics.forEach((topic, i) => {
+      const card = document.createElement('div');
+      card.className = 'topic-card';
+      card.innerHTML = `
+        <div class="card-number">Topic ${topic.number}</div>
+        <div class="card-title">${topic.title}</div>
+        <div class="card-excerpt">${topic.excerpt}</div>
+        <div class="card-arrow">Read Article →</div>
+      `;
+      card.addEventListener('click', () => showArticle(i));
+      grid.appendChild(card);
+    });
+
+    function showArticle(index) {
+      const topic = topics[index];
+      document.getElementById('article-meta').textContent = topic.meta;
+      document.getElementById('article-title').textContent = topic.title;
+      document.getElementById('article-body').innerHTML = topic.content;
+      document.getElementById('home-view').style.display = 'none';
+      document.getElementById('article-view').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showHome() {
+      document.getElementById('home-view').style.display = 'block';
+      document.getElementById('article-view').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
